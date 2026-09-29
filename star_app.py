@@ -169,8 +169,10 @@ m_sel = alt.param(name="m_sel", value=0.0, bind=alt.binding_range(
     min=-1.0, max=2.45, step=0.05, name="log10 mass (suns)  "))
 a_sel = alt.param(name="a_sel", value=0.66, bind=alt.binding_range(
     min=-4.0, max=3.56, step=0.06, name="log10 age (Gyr)  "))
-pick = ("abs(datum.lm - m_sel) < 0.02"
-        " && abs(datum.la - a_sel) < 0.02")
+# half the finest grid step, so the off-grid default age (0.66) still
+# picks exactly one row instead of none
+pick = ("abs(datum.lm - m_sel) < 0.025"
+        " && abs(datum.la - a_sel) < 0.025")
 
 # ---- the portrait ----------------------------------------------------
 CX, CY = 160, 168
